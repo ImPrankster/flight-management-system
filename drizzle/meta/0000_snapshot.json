@@ -3,11 +3,1006 @@
   "prevId": "",
   "version": "5",
   "dialect": "mysql",
-  "tables": {},
+  "tables": {
+    "Account": {
+      "name": "Account",
+      "columns": {
+        "userId": {
+          "autoincrement": false,
+          "name": "userId",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type": {
+          "autoincrement": false,
+          "name": "type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "provider": {
+          "autoincrement": false,
+          "name": "provider",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "providerAccountId": {
+          "autoincrement": false,
+          "name": "providerAccountId",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "refresh_token": {
+          "autoincrement": false,
+          "name": "refresh_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "access_token": {
+          "autoincrement": false,
+          "name": "access_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "expires_at": {
+          "autoincrement": false,
+          "name": "expires_at",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "token_type": {
+          "autoincrement": false,
+          "name": "token_type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "scope": {
+          "autoincrement": false,
+          "name": "scope",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "id_token": {
+          "autoincrement": false,
+          "name": "id_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "session_state": {
+          "autoincrement": false,
+          "name": "session_state",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {
+        "Account_provider_providerAccountId": {
+          "name": "Account_provider_providerAccountId",
+          "columns": [
+            "provider",
+            "providerAccountId"
+          ]
+        }
+      },
+      "indexes": {
+        "account_userId_idx": {
+          "name": "account_userId_idx",
+          "columns": [
+            "userId"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "Account_userId_User_id_fk": {
+          "name": "Account_userId_User_id_fk",
+          "tableFrom": "Account",
+          "tableTo": "User",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "Airline": {
+      "name": "Airline",
+      "columns": {
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {
+        "Airline_name": {
+          "name": "Airline_name",
+          "columns": [
+            "name"
+          ]
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {}
+    },
+    "AirlineStaff": {
+      "name": "AirlineStaff",
+      "columns": {
+        "username": {
+          "autoincrement": false,
+          "name": "username",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "password": {
+          "autoincrement": false,
+          "name": "password",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "first_name": {
+          "autoincrement": false,
+          "name": "first_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "last_name": {
+          "autoincrement": false,
+          "name": "last_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "date_of_birth": {
+          "autoincrement": false,
+          "name": "date_of_birth",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "airline_name": {
+          "autoincrement": false,
+          "name": "airline_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "permissions": {
+          "autoincrement": false,
+          "name": "permissions",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {
+        "AirlineStaff_username": {
+          "name": "AirlineStaff_username",
+          "columns": [
+            "username"
+          ]
+        }
+      },
+      "indexes": {
+        "airline_name": {
+          "name": "airline_name",
+          "columns": [
+            "airline_name"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "AirlineStaff_ibfk_1": {
+          "name": "AirlineStaff_ibfk_1",
+          "tableFrom": "AirlineStaff",
+          "tableTo": "Airline",
+          "columnsFrom": [
+            "airline_name"
+          ],
+          "columnsTo": [
+            "name"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "Airplane": {
+      "name": "Airplane",
+      "columns": {
+        "identification_number": {
+          "autoincrement": false,
+          "name": "identification_number",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "airline_name": {
+          "autoincrement": false,
+          "name": "airline_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "seats_amount": {
+          "autoincrement": false,
+          "name": "seats_amount",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {
+        "Airplane_identification_number": {
+          "name": "Airplane_identification_number",
+          "columns": [
+            "identification_number"
+          ]
+        }
+      },
+      "indexes": {
+        "airline_name": {
+          "name": "airline_name",
+          "columns": [
+            "airline_name"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "Airplane_ibfk_1": {
+          "name": "Airplane_ibfk_1",
+          "tableFrom": "Airplane",
+          "tableTo": "Airline",
+          "columnsFrom": [
+            "airline_name"
+          ],
+          "columnsTo": [
+            "name"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "Airport": {
+      "name": "Airport",
+      "columns": {
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "city": {
+          "autoincrement": false,
+          "name": "city",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {
+        "Airport_name": {
+          "name": "Airport_name",
+          "columns": [
+            "name"
+          ]
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {}
+    },
+    "BookingAgent": {
+      "name": "BookingAgent",
+      "columns": {
+        "email": {
+          "autoincrement": false,
+          "name": "email",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "password": {
+          "autoincrement": false,
+          "name": "password",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "booking_agent_id": {
+          "autoincrement": false,
+          "name": "booking_agent_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {
+        "BookingAgent_email": {
+          "name": "BookingAgent_email",
+          "columns": [
+            "email"
+          ]
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {
+        "booking_agent_id": {
+          "name": "booking_agent_id",
+          "columns": [
+            "booking_agent_id"
+          ]
+        }
+      }
+    },
+    "Customer": {
+      "name": "Customer",
+      "columns": {
+        "email": {
+          "autoincrement": false,
+          "name": "email",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "password": {
+          "autoincrement": false,
+          "name": "password",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "building_number": {
+          "autoincrement": false,
+          "name": "building_number",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "street": {
+          "autoincrement": false,
+          "name": "street",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "city": {
+          "autoincrement": false,
+          "name": "city",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "state": {
+          "autoincrement": false,
+          "name": "state",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "phone_number": {
+          "autoincrement": false,
+          "name": "phone_number",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "passport_number": {
+          "autoincrement": false,
+          "name": "passport_number",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "passport_expiration": {
+          "autoincrement": false,
+          "name": "passport_expiration",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "passport_country": {
+          "autoincrement": false,
+          "name": "passport_country",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "date_of_birth": {
+          "autoincrement": false,
+          "name": "date_of_birth",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {
+        "Customer_email": {
+          "name": "Customer_email",
+          "columns": [
+            "email"
+          ]
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {}
+    },
+    "Flight": {
+      "name": "Flight",
+      "columns": {
+        "flight_number": {
+          "autoincrement": false,
+          "name": "flight_number",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "airline_name": {
+          "autoincrement": false,
+          "name": "airline_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "departure_airport": {
+          "autoincrement": false,
+          "name": "departure_airport",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "departure_time": {
+          "autoincrement": false,
+          "name": "departure_time",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "arrival_airport": {
+          "autoincrement": false,
+          "name": "arrival_airport",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "arrival_time": {
+          "autoincrement": false,
+          "name": "arrival_time",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price": {
+          "autoincrement": false,
+          "name": "price",
+          "type": "decimal(10,2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "airplane_identification_number": {
+          "autoincrement": false,
+          "name": "airplane_identification_number",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "status": {
+          "autoincrement": false,
+          "name": "status",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {
+        "Flight_flight_number": {
+          "name": "Flight_flight_number",
+          "columns": [
+            "flight_number"
+          ]
+        }
+      },
+      "indexes": {
+        "airline_name": {
+          "name": "airline_name",
+          "columns": [
+            "airline_name"
+          ],
+          "isUnique": false
+        },
+        "departure_airport": {
+          "name": "departure_airport",
+          "columns": [
+            "departure_airport"
+          ],
+          "isUnique": false
+        },
+        "arrival_airport": {
+          "name": "arrival_airport",
+          "columns": [
+            "arrival_airport"
+          ],
+          "isUnique": false
+        },
+        "airplane_identification_number": {
+          "name": "airplane_identification_number",
+          "columns": [
+            "airplane_identification_number"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "Flight_ibfk_1": {
+          "name": "Flight_ibfk_1",
+          "tableFrom": "Flight",
+          "tableTo": "Airline",
+          "columnsFrom": [
+            "airline_name"
+          ],
+          "columnsTo": [
+            "name"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "Flight_ibfk_2": {
+          "name": "Flight_ibfk_2",
+          "tableFrom": "Flight",
+          "tableTo": "Airport",
+          "columnsFrom": [
+            "departure_airport"
+          ],
+          "columnsTo": [
+            "name"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "Flight_ibfk_3": {
+          "name": "Flight_ibfk_3",
+          "tableFrom": "Flight",
+          "tableTo": "Airport",
+          "columnsFrom": [
+            "arrival_airport"
+          ],
+          "columnsTo": [
+            "name"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "Flight_ibfk_4": {
+          "name": "Flight_ibfk_4",
+          "tableFrom": "Flight",
+          "tableTo": "Airplane",
+          "columnsFrom": [
+            "airplane_identification_number"
+          ],
+          "columnsTo": [
+            "identification_number"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "FlightPassenger": {
+      "name": "FlightPassenger",
+      "columns": {
+        "flight_number": {
+          "autoincrement": false,
+          "name": "flight_number",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "airline_name": {
+          "autoincrement": false,
+          "name": "airline_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "customer_email": {
+          "autoincrement": false,
+          "name": "customer_email",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "flight_number": {
+          "name": "flight_number",
+          "columns": [
+            "flight_number"
+          ],
+          "isUnique": false
+        },
+        "airline_name": {
+          "name": "airline_name",
+          "columns": [
+            "airline_name"
+          ],
+          "isUnique": false
+        },
+        "customer_email": {
+          "name": "customer_email",
+          "columns": [
+            "customer_email"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "FlightPassenger_ibfk_1": {
+          "name": "FlightPassenger_ibfk_1",
+          "tableFrom": "FlightPassenger",
+          "tableTo": "Flight",
+          "columnsFrom": [
+            "flight_number"
+          ],
+          "columnsTo": [
+            "flight_number"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "FlightPassenger_ibfk_2": {
+          "name": "FlightPassenger_ibfk_2",
+          "tableFrom": "FlightPassenger",
+          "tableTo": "Airline",
+          "columnsFrom": [
+            "airline_name"
+          ],
+          "columnsTo": [
+            "name"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "FlightPassenger_ibfk_3": {
+          "name": "FlightPassenger_ibfk_3",
+          "tableFrom": "FlightPassenger",
+          "tableTo": "Customer",
+          "columnsFrom": [
+            "customer_email"
+          ],
+          "columnsTo": [
+            "email"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "Session": {
+      "name": "Session",
+      "columns": {
+        "sessionToken": {
+          "autoincrement": false,
+          "name": "sessionToken",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "userId": {
+          "autoincrement": false,
+          "name": "userId",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires": {
+          "autoincrement": false,
+          "name": "expires",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {
+        "Session_sessionToken": {
+          "name": "Session_sessionToken",
+          "columns": [
+            "sessionToken"
+          ]
+        }
+      },
+      "indexes": {
+        "session_userId_idx": {
+          "name": "session_userId_idx",
+          "columns": [
+            "userId"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "Session_userId_User_id_fk": {
+          "name": "Session_userId_User_id_fk",
+          "tableFrom": "Session",
+          "tableTo": "User",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "Ticket": {
+      "name": "Ticket",
+      "columns": {
+        "ticket_id": {
+          "autoincrement": false,
+          "name": "ticket_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "customer_email": {
+          "autoincrement": false,
+          "name": "customer_email",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "airline_name": {
+          "autoincrement": false,
+          "name": "airline_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "flight_number": {
+          "autoincrement": false,
+          "name": "flight_number",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "booking_agent_id": {
+          "autoincrement": false,
+          "name": "booking_agent_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {
+        "Ticket_ticket_id": {
+          "name": "Ticket_ticket_id",
+          "columns": [
+            "ticket_id"
+          ]
+        }
+      },
+      "indexes": {
+        "customer_email": {
+          "name": "customer_email",
+          "columns": [
+            "customer_email"
+          ],
+          "isUnique": false
+        },
+        "airline_name": {
+          "name": "airline_name",
+          "columns": [
+            "airline_name"
+          ],
+          "isUnique": false
+        },
+        "flight_number": {
+          "name": "flight_number",
+          "columns": [
+            "flight_number"
+          ],
+          "isUnique": false
+        },
+        "booking_agent_id": {
+          "name": "booking_agent_id",
+          "columns": [
+            "booking_agent_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "Ticket_ibfk_1": {
+          "name": "Ticket_ibfk_1",
+          "tableFrom": "Ticket",
+          "tableTo": "Customer",
+          "columnsFrom": [
+            "customer_email"
+          ],
+          "columnsTo": [
+            "email"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "Ticket_ibfk_2": {
+          "name": "Ticket_ibfk_2",
+          "tableFrom": "Ticket",
+          "tableTo": "Airline",
+          "columnsFrom": [
+            "airline_name"
+          ],
+          "columnsTo": [
+            "name"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "Ticket_ibfk_3": {
+          "name": "Ticket_ibfk_3",
+          "tableFrom": "Ticket",
+          "tableTo": "Flight",
+          "columnsFrom": [
+            "flight_number"
+          ],
+          "columnsTo": [
+            "flight_number"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "Ticket_ibfk_4": {
+          "name": "Ticket_ibfk_4",
+          "tableFrom": "Ticket",
+          "tableTo": "BookingAgent",
+          "columnsFrom": [
+            "booking_agent_id"
+          ],
+          "columnsTo": [
+            "booking_agent_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "User": {
+      "name": "User",
+      "columns": {
+        "id": {
+          "autoincrement": false,
+          "name": "id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "autoincrement": false,
+          "name": "email",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "emailVerified": {
+          "default": "CURRENT_TIMESTAMP(3)",
+          "autoincrement": false,
+          "name": "emailVerified",
+          "type": "timestamp(3)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "image": {
+          "autoincrement": false,
+          "name": "image",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {
+        "User_id": {
+          "name": "User_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {}
+    },
+    "VerificationToken": {
+      "name": "VerificationToken",
+      "columns": {
+        "identifier": {
+          "autoincrement": false,
+          "name": "identifier",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "token": {
+          "autoincrement": false,
+          "name": "token",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires": {
+          "autoincrement": false,
+          "name": "expires",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {
+        "VerificationToken_identifier_token": {
+          "name": "VerificationToken_identifier_token",
+          "columns": [
+            "identifier",
+            "token"
+          ]
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
   "schemas": {},
   "_meta": {
-    "columns": {},
     "schemas": {},
-    "tables": {}
+    "tables": {},
+    "columns": {}
   }
 }
