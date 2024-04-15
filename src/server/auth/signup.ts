@@ -20,11 +20,15 @@ export async function signup(formData: FormData): Promise<ActionResult> {
 
   const userId = generateId(15);
 
-  await db.insert(userTable).values({
-    id: userId,
-    email: email,
-    hashedPassword: hashedPassword,
-  });
+  try {
+    await db.insert(userTable).values({
+      id: userId,
+      email: email,
+      hashedPassword: hashedPassword,
+    });
+  } catch (e) {
+    throw new Error("User already exists");
+  }
 
   const session = await lucia.createSession(userId, {});
   const sessionCookie = lucia.createSessionCookie(session.id);

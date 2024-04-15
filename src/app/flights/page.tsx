@@ -50,7 +50,7 @@ const FlightsPage = async () => {
                 </TableCell>
                 <TableCell className="font-mono">{flight.price}</TableCell>
                 <TableCell className="font-mono">
-                  {flight.airplaneIdentificationNumber}
+                  {flight.airplaneIdNum}
                 </TableCell>
                 <TableCell className="uppercase">{flight.status}</TableCell>
               </TableRow>
