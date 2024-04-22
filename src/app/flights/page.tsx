@@ -11,6 +11,7 @@ import { flight } from "~/server/db/schema";
 
 const FlightsPage = async () => {
   const data = await db.select().from(flight);
+
   return (
     <main className="flex flex-col p-4">
       <h2 className="ml-4 scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">

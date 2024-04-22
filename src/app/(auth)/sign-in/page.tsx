@@ -24,7 +24,7 @@ export default function SignInPage() {
 
   return (
     <Form {...form}>
-      <form action={signin} className="m-2 max-w-lg space-y-2">
+      <form action={signin} className="m-2 flex flex-col gap-4">
         <FormField
           control={form.control}
           name="email"
@@ -32,7 +32,11 @@ export default function SignInPage() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="example@example.com" {...field} />
+                <Input
+                  className="max-w-sm"
+                  placeholder="example@example.com"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -45,7 +49,7 @@ export default function SignInPage() {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input type="password" {...field} />
+                <Input className="max-w-sm" type="password" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -55,6 +59,7 @@ export default function SignInPage() {
         <Button
           disabled={Object.keys(form.formState.errors).length != 0}
           type="submit"
+          className="max-w-sm"
         >
           Sign In
         </Button>

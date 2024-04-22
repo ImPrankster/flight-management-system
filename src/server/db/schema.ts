@@ -4,6 +4,7 @@ import {
   int,
   datetime,
   decimal,
+  mysqlEnum,
 } from "drizzle-orm/mysql-core";
 
 export const userTable = mysqlTable("User", {
@@ -40,11 +41,16 @@ export const airlineStaff = mysqlTable("AirlineStaff", {
   airlineName: varchar("airline_name", { length: 255 }).references(
     () => airline.name,
   ),
-  permissions: varchar("permissions", { length: 255 }),
+  permissions: mysqlEnum("permissions", [
+    "admin",
+    "operator",
+    "none",
+    "adminOperator",
+  ]),
 });
 
 export const airplane = mysqlTable("Airplane", {
-  idNum: int("id_num").primaryKey(),
+  idNum: int("id_num").primaryKey().autoincrement(),
   airlineName: varchar("airline_name", { length: 255 }).references(
     () => airline.name,
   ),
@@ -60,6 +66,9 @@ export const bookingAgent = mysqlTable("BookingAgent", {
   email: varchar("email", { length: 255 })
     .references(() => userTable.email)
     .primaryKey(),
+  airlineName: varchar("airline_name", { length: 255 }).references(
+    () => airline.name,
+  ),
   bookingAgentId: int("booking_agent_id").unique().autoincrement(),
 });
 
@@ -67,8 +76,9 @@ export const customer = mysqlTable("Customer", {
   email: varchar("email", { length: 255 })
     .references(() => userTable.email)
     .primaryKey(),
-  name: varchar("name", { length: 255 }),
-  buildingNumber: int("building_number"),
+  firstName: varchar("firstName", { length: 255 }),
+  lastName: varchar("lastName", { length: 255 }),
+  buildingNumber: varchar("building_number", { length: 255 }),
   street: varchar("street", { length: 255 }),
   city: varchar("city", { length: 255 }),
   state: varchar("state", { length: 255 }),
@@ -80,7 +90,7 @@ export const customer = mysqlTable("Customer", {
 });
 
 export const flight = mysqlTable("Flight", {
-  flightNumber: int("flight_number").primaryKey(),
+  flightNumber: int("flight_number").primaryKey().autoincrement(),
   airlineName: varchar("airline_name", { length: 255 }).references(
     () => airline.name,
   ),
@@ -97,23 +107,10 @@ export const flight = mysqlTable("Flight", {
   status: varchar("status", { length: 255 }),
 });
 
-export const flightPassenger = mysqlTable("FlightPassenger", {
-  flightNumber: int("flight_number").references(() => flight.flightNumber),
-  airlineName: varchar("airline_name", { length: 255 }).references(
-    () => airline.name,
-  ),
-  customerEmail: varchar("customer_email", { length: 255 }).references(
-    () => customer.email,
-  ),
-});
-
 export const ticket = mysqlTable("Ticket", {
-  ticketId: int("ticket_id").primaryKey(),
+  ticketId: int("ticket_id").primaryKey().autoincrement(),
   customerEmail: varchar("customer_email", { length: 255 }).references(
     () => customer.email,
-  ),
-  airlineName: varchar("airline_name", { length: 255 }).references(
-    () => airline.name,
   ),
   flightNumber: int("flight_number").references(() => flight.flightNumber),
   bookingAgentId: int("booking_agent_id").references(
