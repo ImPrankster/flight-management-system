@@ -1,14 +1,30 @@
 import { getAirlineStaffPermission } from "~/server/auth/getAirlineStaffPermission";
 import { getUser } from "~/server/auth/getUser";
 import { db } from "~/server/db";
-import { flight } from "~/server/db/schema";
+import { airlineStaff, flight } from "~/server/db/schema";
 import FlightsTable from "../../../components/flightsTable";
 import UpdateFlight from "./updateFlight";
+import CreateFlight from "./createFlight";
+import { desc, eq, sql } from "drizzle-orm";
 
 const FlightsManagementPage = async () => {
   const user = await getUser();
   const permission = await getAirlineStaffPermission(user!.email);
-  const flights = await db.select().from(flight).limit(255);
+  const aNResult = await db
+    .select({
+      airlineName: airlineStaff.airlineName,
+    })
+    .from(airlineStaff)
+    .where(eq(airlineStaff.email, user!.email));
+  const airlineName = aNResult[0]!.airlineName;
+  const flights = await db
+    .select()
+    .from(flight)
+    .where(
+      sql`${flight.departureTime} < NOW() + INTERVAL 1 MONTH AND ${flight.airlineName} = ${airlineName}`,
+    )
+    .orderBy(desc(flight.departureTime))
+    .limit(32);
 
   return (
     <main className="flex flex-col gap-4 p-4">
@@ -22,6 +38,7 @@ const FlightsManagementPage = async () => {
         <FlightsTable data={flights} />
       </div>
       {permission >= 1 && <UpdateFlight />}
+      {permission >= 2 && <CreateFlight />}
     </main>
   );
 };

@@ -81,13 +81,12 @@ export const updateFlightFormSchema = z.object({
 });
 
 export const createFlightFormSchema = z.object({
-  airlineName: z.string().max(255),
   departureAirport: z.string().max(255),
   departureTime: z.string().max(255),
   arrivalAirport: z.string().max(255),
   arrivalTime: z.string().max(255),
-  price: z.number(),
-  airplaneIdNum: z.number(),
+  price: z.string().max(255),
+  airplaneIdNum: z.coerce.number(),
   status: z.enum([
     "upcoming",
     "in-progress",
