@@ -41,12 +41,7 @@ export const airlineStaff = mysqlTable("AirlineStaff", {
   airlineName: varchar("airline_name", { length: 255 }).references(
     () => airline.name,
   ),
-  permissions: mysqlEnum("permissions", [
-    "admin",
-    "operator",
-    "none",
-    "adminOperator",
-  ]),
+  permission: int("permission"),
 });
 
 export const airplane = mysqlTable("Airplane", {
@@ -104,7 +99,13 @@ export const flight = mysqlTable("Flight", {
   arrivalTime: datetime("arrival_time", { mode: "string" }),
   price: decimal("price", { precision: 10, scale: 2 }),
   airplaneIdNum: int("airplane_id_num").references(() => airplane.idNum),
-  status: varchar("status", { length: 255 }),
+  status: mysqlEnum("status", [
+    "upcoming",
+    "in-progress",
+    "delayed",
+    "cancelled",
+    "completed",
+  ]),
 });
 
 export const ticket = mysqlTable("Ticket", {

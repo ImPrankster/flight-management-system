@@ -299,17 +299,15 @@ export default function SignUpPage() {
                   <FormItem>
                     <FormLabel>Permissions</FormLabel>
                     <FormControl>
+                      {/* @ts-expect-error: value will be coerced */}
                       <Select onValueChange={field.onChange} {...field}>
                         <SelectTrigger>
                           <SelectValue placeholder="Select permissions" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="admin">Admin</SelectItem>
-                          <SelectItem value="operator">Operator</SelectItem>
-                          <SelectItem value="none">None</SelectItem>
-                          <SelectItem value="adminOperator">
-                            Admin Operator
-                          </SelectItem>
+                          <SelectItem value="2">Admin</SelectItem>
+                          <SelectItem value="1">Operator</SelectItem>
+                          <SelectItem value="0">None</SelectItem>
                         </SelectContent>
                       </Select>
                     </FormControl>

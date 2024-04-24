@@ -18,9 +18,9 @@ export const SignUpFormSchema = z.discriminatedUnion("userType", [
     state: z.string().max(255),
     phoneNum: z.string().max(255),
     passportNum: z.string().max(255),
-    passportExp: z.string(),
+    passportExp: z.string().max(255),
     passportCountry: z.string().max(255),
-    dateOfBirth: z.string(),
+    dateOfBirth: z.string().max(255),
   }),
   z.object({
     email: z.string().email({ message: "Invalid email." }),
@@ -34,8 +34,8 @@ export const SignUpFormSchema = z.discriminatedUnion("userType", [
     airlineName: z.string().max(255),
     firstName: z.string().max(255),
     lastName: z.string().max(255),
-    dateOfBirth: z.string(),
-    permissions: z.enum(["admin", "operator", "none", "adminOperator"]),
+    dateOfBirth: z.string().max(255),
+    permissions: z.coerce.number().min(0).max(2),
   }),
   z.object({
     email: z.string().email({ message: "Invalid email." }),
@@ -63,4 +63,36 @@ export const SignInFormSchema = z.object({
 export const airportFormSchema = z.object({
   name: z.string().max(255),
   city: z.string().max(255).optional(),
+});
+
+export const airplaneFormSchema = z.object({
+  seatsAmount: z.coerce.number(),
+});
+
+export const updateFlightFormSchema = z.object({
+  flightNumber: z.coerce.number(),
+  newStatus: z.enum([
+    "upcoming",
+    "in-progress",
+    "delayed",
+    "cancelled",
+    "completed",
+  ]),
+});
+
+export const createFlightFormSchema = z.object({
+  airlineName: z.string().max(255),
+  departureAirport: z.string().max(255),
+  departureTime: z.string().max(255),
+  arrivalAirport: z.string().max(255),
+  arrivalTime: z.string().max(255),
+  price: z.number(),
+  airplaneIdNum: z.number(),
+  status: z.enum([
+    "upcoming",
+    "in-progress",
+    "delayed",
+    "cancelled",
+    "completed",
+  ]),
 });

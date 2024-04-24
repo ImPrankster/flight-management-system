@@ -26,6 +26,7 @@ export default function RootLayout({
         <NavBar />
         <div className="h-16" />
         {children}
+        <Toaster />
       </body>
       <Toaster />
     </html>

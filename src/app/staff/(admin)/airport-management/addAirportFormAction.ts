@@ -17,5 +17,5 @@ export async function addAirportForm(formData: FormData) {
     throw new Error("Failed to add airport");
   }
 
-  revalidatePath("/staff/system-management");
+  revalidatePath("/staff/airport-management");
 }

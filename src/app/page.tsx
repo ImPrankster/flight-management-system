@@ -45,13 +45,8 @@ export default async function HomePage() {
                 "airline-staff": (
                   <div className="flex max-w-3xl flex-wrap place-content-center gap-2">
                     <Button variant={"ghost"} asChild className="text-lg">
-                      <Link href="/staff/edit-flights">
-                        Flight Search <ArrowRight className="ml-2" />
-                      </Link>
-                    </Button>
-                    <Button variant={"ghost"} asChild className="text-lg">
-                      <Link href="/staff/my-flights">
-                        Check My Flights <ArrowRight className="ml-2" />
+                      <Link href="/staff/flights-management">
+                        Manage Flights <ArrowRight className="ml-2" />
                       </Link>
                     </Button>
                     <Button variant={"ghost"} asChild className="text-lg">
@@ -62,6 +57,11 @@ export default async function HomePage() {
                     <Button variant={"ghost"} asChild className="text-lg">
                       <Link href="/staff/airport-management">
                         Manage Airports <ArrowRight className="ml-2" />
+                      </Link>
+                    </Button>
+                    <Button variant={"ghost"} asChild className="text-lg">
+                      <Link href="/staff/airplane-management">
+                        Manage Airplanes <ArrowRight className="ml-2" />
                       </Link>
                     </Button>
                     <Button variant={"ghost"} asChild className="text-lg">

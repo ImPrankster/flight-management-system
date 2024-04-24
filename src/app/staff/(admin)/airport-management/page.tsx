@@ -26,9 +26,6 @@ const AirportManagePage = async () => {
       <h2 className="ml-4 scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
         Airport Management
       </h2>
-      <h3 className="ml-4 scroll-m-20 text-xl font-semibold tracking-tight">
-        Airports:
-      </h3>
       <div className="grid h-[60vh] grid-cols-2 gap-4">
         <DataTable columns={airportTableColumn} data={airports} />
         <AddAirportForm />
