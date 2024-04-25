@@ -60,7 +60,7 @@ const flightsTableColumn: ColumnDef<InferSelectModel<typeof flight>>[] = [
         currency: "USD",
       }).format(amount);
 
-      return <div className="text-right font-medium">{formatted}</div>;
+      return <div className="font-medium">{formatted}</div>;
     },
   },
   {

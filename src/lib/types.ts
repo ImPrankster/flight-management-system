@@ -95,3 +95,9 @@ export const createFlightFormSchema = z.object({
     "completed",
   ]),
 });
+
+export const searchFlightsFormSchema = z.object({
+  departureAirport: z.string().max(255).optional(),
+  arrivalAirport: z.string().max(255).optional(),
+  departureDate: z.string().max(255).optional(),
+});
