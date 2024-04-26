@@ -19,6 +19,7 @@ import {
 import { Input } from "~/components/ui/input";
 import { searchFlightsFormSchema } from "~/lib/types";
 import { type flight } from "~/server/db/schema";
+import FlightsTableWithPurchase from "./flightsTableWithPurchase";
 
 const SearchPage = () => {
   const form = useForm<z.infer<typeof searchFlightsFormSchema>>({
@@ -99,7 +100,7 @@ const SearchPage = () => {
       <h3 className="ml-4 scroll-m-20 text-xl font-semibold tracking-tight">
         Result:
       </h3>
-      <FlightsTable data={data} />
+      <FlightsTableWithPurchase data={data} />
     </main>
   );
 };
