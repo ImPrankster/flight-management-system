@@ -2,7 +2,8 @@ import { eq, sql, sum } from "drizzle-orm";
 import { getUser } from "~/server/auth/getUser";
 import { db } from "~/server/db";
 import { flight, ticket } from "~/server/db/schema";
-import SpendingDataChart from "./chart";
+import dynamic from "next/dynamic";
+const SpendingDataChart = dynamic(() => import("./chart"), { ssr: false });
 
 export default async function SpendingPage() {
   const user = await getUser();
@@ -16,6 +17,11 @@ export default async function SpendingPage() {
     .where(eq(ticket.customerEmail, user!.email))
     .groupBy(sql`MONTH(${flight.departureTime})`);
 
+  const total = result.reduce(
+    (acc, { sum }) => acc + parseFloat(sum ? sum : "0"),
+    0,
+  );
+
   console.log(result);
 
   return (
@@ -23,7 +29,7 @@ export default async function SpendingPage() {
       <h2 className="ml-4 scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
         My Spending
       </h2>
-      {/* <h3 className="ml-4 scroll-m-20 text-2xl font-semibold tracking-tight">
+      <h3 className="ml-4 scroll-m-20 text-2xl font-semibold tracking-tight">
         Total Spending:{" "}
         <span>
           {new Intl.NumberFormat("en-US", {
@@ -31,7 +37,10 @@ export default async function SpendingPage() {
             currency: "USD",
           }).format(total)}
         </span>
-      </h3> */}
+      </h3>
+      <h3 className="ml-4 scroll-m-20 text-2xl font-semibold tracking-tight">
+        Spending Breakdown
+      </h3>
       <SpendingDataChart data={result} />
     </main>
   );

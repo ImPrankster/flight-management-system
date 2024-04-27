@@ -1,24 +1,16 @@
 "use client";
 
-import {
-  Bar,
-  ComposedChart,
-  Legend,
-  Line,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { Bar, ComposedChart, Label, Tooltip, XAxis, YAxis } from "recharts";
 
 const SpendingDataChart = ({ data }: { data: unknown[] }) => {
   return (
-    <ComposedChart data={data}>
-      <XAxis dataKey="month" />
+    <ComposedChart data={data} width={1024} height={512}>
+      <XAxis dataKey="month">
+        <Label value="Month" offset={-4} position="insideBottom" />
+      </XAxis>
       <YAxis />
       <Tooltip />
-      <Legend />
-      <Bar dataKey="sum" fill="#8884d8" />
-      <Line type="monotone" dataKey="sum" stroke="#ff7300" />
+      <Bar dataKey="sum" fill="#020817" />
     </ComposedChart>
   );
 };
