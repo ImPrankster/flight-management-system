@@ -5,7 +5,7 @@ import { getUser } from "~/server/auth/getUser";
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   const user = await getUser();
   if (!user) {
-    return { redirect: "/sign-in" };
+    redirect("/");
   }
   if (!(await checkUserType(user.email, ["customer", "booking-agent"]))) {
     redirect("/");

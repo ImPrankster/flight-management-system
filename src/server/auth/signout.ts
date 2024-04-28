@@ -7,6 +7,7 @@ import { redirect } from "next/navigation";
 
 export async function signout() {
   const { session } = await validateRequest();
+
   if (!session) {
     return {
       error: "Unauthorized",

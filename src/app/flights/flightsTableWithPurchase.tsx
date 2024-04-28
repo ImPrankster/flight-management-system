@@ -6,6 +6,16 @@ import { toast } from "sonner";
 import { DataTable } from "~/components/dataTable";
 import { Button } from "~/components/ui/button";
 import { type flight } from "~/server/db/schema";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "~/components/ui/dialog";
+import { Input } from "~/components/ui/input";
+import { useState } from "react";
 
 const flightsTableColumn: ColumnDef<InferSelectModel<typeof flight>>[] = [
   {
@@ -85,32 +95,7 @@ const flightsTableColumn: ColumnDef<InferSelectModel<typeof flight>>[] = [
     header: "Purchase",
     id: "purchase",
     cell: ({ row }) => {
-      return (
-        <Button
-          onClick={async () => {
-            const result = await fetch("/ticketing/search/api/purchase", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                flightNumber: row.getValue("flightNumber"),
-              }),
-            });
-            if (result.ok) {
-              toast("Purchase successful", {
-                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                description: `Purchased flight ${row.getValue("flightNumber")} From ${row.getValue("departureAirport")} to ${row.getValue("arrivalAirport")} At ${new Date(row.getValue("departureTime")).toLocaleString()}`,
-              });
-            } else {
-              toast("Purchase failed");
-            }
-          }}
-          className="hover:bg-blue-700"
-        >
-          Purchase
-        </Button>
-      );
+      return <PurchaseDialog row={row} />;
     },
   },
 ];
@@ -124,3 +109,59 @@ const FlightsTableWithPurchase = ({
 };
 
 export default FlightsTableWithPurchase;
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function PurchaseDialog({ row }: { row: any }) {
+  const [email, setEmail] = useState<string>("");
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button className="hover:bg-blue-700">Purchase</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Complete the purchase</DialogTitle>
+        </DialogHeader>
+        To purchase for someone else, enter the email address of the person
+        (Optional).
+        <Input
+          placeholder="example@example.com"
+          onChange={(e) => {
+            e.preventDefault();
+            setEmail(e.target.value);
+          }}
+        />
+        <DialogFooter>
+          <Button
+            onClick={async () => {
+              const result = await fetch("/flights/api/purchase", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+                  flightNumber: row.getValue("flightNumber"),
+                  email: email,
+                }),
+              });
+
+              if (result.ok) {
+                toast("Purchase successful", {
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument
+                  description: `Purchased flight ${row.getValue("flightNumber")} From ${row.getValue("departureAirport")} to ${row.getValue("arrivalAirport")} At ${new Date(row.getValue("departureTime")).toLocaleString()}`,
+                });
+              } else {
+                toast("Purchase failed", {
+                  description: await result.text(),
+                });
+              }
+            }}
+          >
+            Purchase for {email || "yourself"}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}

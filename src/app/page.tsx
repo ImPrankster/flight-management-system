@@ -26,7 +26,7 @@ export default async function HomePage() {
                 customer: (
                   <div className="flex gap-2">
                     <Button variant={"ghost"} asChild className="text-lg">
-                      <Link href="/ticketing/search">
+                      <Link href="/flights">
                         Flight Search <ArrowRight className="ml-2" />
                       </Link>
                     </Button>
@@ -80,7 +80,7 @@ export default async function HomePage() {
                 "booking-agent": (
                   <div className="flex gap-2">
                     <Button variant={"ghost"} asChild className="text-lg">
-                      <Link href="/ticketing/search">
+                      <Link href="/flights">
                         Flight Search <ArrowRight className="ml-2" />
                       </Link>
                     </Button>
