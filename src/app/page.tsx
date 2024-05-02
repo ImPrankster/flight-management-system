@@ -22,82 +22,81 @@ export default async function HomePage() {
             </span>
 
             {
-              {
-                customer: (
-                  <div className="flex gap-2">
-                    <Button variant={"ghost"} asChild className="text-lg">
-                      <Link href="/flights">
-                        Flight Search <ArrowRight className="ml-2" />
-                      </Link>
-                    </Button>
-                    <Button variant={"ghost"} asChild className="text-lg">
-                      <Link href="/ticketing/my-flights">
-                        Check My Flights <ArrowRight className="ml-2" />
-                      </Link>
-                    </Button>
-                    <Button variant={"ghost"} asChild className="text-lg">
-                      <Link href="/ticketing/statistic">
-                        Check My Spending <ArrowRight className="ml-2" />
-                      </Link>
-                    </Button>
-                  </div>
-                ),
-                "airline-staff": (
-                  <div className="flex max-w-3xl flex-wrap place-content-center gap-2">
-                    <Button variant={"ghost"} asChild className="text-lg">
-                      <Link href="/staff/flights-management">
-                        Manage Flights <ArrowRight className="ml-2" />
-                      </Link>
-                    </Button>
-                    <Button variant={"ghost"} asChild className="text-lg">
-                      <Link href="/staff/role-management">
-                        Manage Roles <ArrowRight className="ml-2" />
-                      </Link>
-                    </Button>
-                    <Button variant={"ghost"} asChild className="text-lg">
-                      <Link href="/staff/airport-management">
-                        Manage Airports <ArrowRight className="ml-2" />
-                      </Link>
-                    </Button>
-                    <Button variant={"ghost"} asChild className="text-lg">
-                      <Link href="/staff/airplane-management">
-                        Manage Airplanes <ArrowRight className="ml-2" />
-                      </Link>
-                    </Button>
-                    <Button variant={"ghost"} asChild className="text-lg">
-                      <Link href="/staff/system-report">
-                        View System Report <ArrowRight className="ml-2" />
-                      </Link>
-                    </Button>
-                    <Button variant={"ghost"} asChild className="text-lg">
-                      <Link href="/staff/my-earning">
-                        View My Earning
-                        <ArrowRight className="ml-2" />
-                      </Link>
-                    </Button>
-                  </div>
-                ),
-                "booking-agent": (
-                  <div className="flex gap-2">
-                    <Button variant={"ghost"} asChild className="text-lg">
-                      <Link href="/flights">
-                        Flight Search <ArrowRight className="ml-2" />
-                      </Link>
-                    </Button>
-                    <Button variant={"ghost"} asChild className="text-lg">
-                      <Link href="/ticketing/my-flights">
-                        Check My Flights <ArrowRight className="ml-2" />
-                      </Link>
-                    </Button>
-                    <Button variant={"ghost"} asChild className="text-lg">
-                      <Link href="/ticketing/statistic">
-                        Check My Stats <ArrowRight className="ml-2" />
-                      </Link>
-                    </Button>
-                  </div>
-                ),
-                unspecified: null,
-              }[userType]
+              <div className="flex max-w-3xl flex-wrap place-content-center gap-2">
+                <Button variant={"ghost"} asChild className="text-lg">
+                  <Link href="/flights">
+                    Flight Search <ArrowRight className="ml-2" />
+                  </Link>
+                </Button>
+                {
+                  {
+                    customer: (
+                      <>
+                        <Button variant={"ghost"} asChild className="text-lg">
+                          <Link href="/ticketing/my-flights">
+                            Check My Flights <ArrowRight className="ml-2" />
+                          </Link>
+                        </Button>
+                        <Button variant={"ghost"} asChild className="text-lg">
+                          <Link href="/ticketing/statistic">
+                            Check My Spending <ArrowRight className="ml-2" />
+                          </Link>
+                        </Button>
+                      </>
+                    ),
+                    "airline-staff": (
+                      <>
+                        <Button variant={"ghost"} asChild className="text-lg">
+                          <Link href="/staff/flights-management">
+                            Manage Flights <ArrowRight className="ml-2" />
+                          </Link>
+                        </Button>
+                        <Button variant={"ghost"} asChild className="text-lg">
+                          <Link href="/staff/role-management">
+                            Manage Roles <ArrowRight className="ml-2" />
+                          </Link>
+                        </Button>
+                        <Button variant={"ghost"} asChild className="text-lg">
+                          <Link href="/staff/airport-management">
+                            Manage Airports <ArrowRight className="ml-2" />
+                          </Link>
+                        </Button>
+                        <Button variant={"ghost"} asChild className="text-lg">
+                          <Link href="/staff/airplane-management">
+                            Manage Airplanes <ArrowRight className="ml-2" />
+                          </Link>
+                        </Button>
+                        <Button variant={"ghost"} asChild className="text-lg">
+                          <Link href="/staff/system-report">
+                            View System Report <ArrowRight className="ml-2" />
+                          </Link>
+                        </Button>
+                        <Button variant={"ghost"} asChild className="text-lg">
+                          <Link href="/staff/my-earning">
+                            View My Earning
+                            <ArrowRight className="ml-2" />
+                          </Link>
+                        </Button>
+                      </>
+                    ),
+                    "booking-agent": (
+                      <>
+                        <Button variant={"ghost"} asChild className="text-lg">
+                          <Link href="/ticketing/my-flights">
+                            Check My Flights <ArrowRight className="ml-2" />
+                          </Link>
+                        </Button>
+                        <Button variant={"ghost"} asChild className="text-lg">
+                          <Link href="/ticketing/statistic">
+                            Check My Stats <ArrowRight className="ml-2" />
+                          </Link>
+                        </Button>
+                      </>
+                    ),
+                    unspecified: null,
+                  }[userType]
+                }
+              </div>
             }
 
             <form action={signout}>

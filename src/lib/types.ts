@@ -48,6 +48,16 @@ export const SignUpFormSchema = z.discriminatedUnion("userType", [
     userType: z.literal("booking-agent"),
     airlineName: z.string().max(255),
   }),
+  z.object({
+    email: z.string().email({ message: "Invalid email." }),
+    password: z
+      .string()
+      .min(6, {
+        message: "Password must be at least 6 characters.",
+      })
+      .max(255),
+    userType: z.literal("none"),
+  }),
 ]);
 
 export const SignInFormSchema = z.object({
@@ -62,7 +72,7 @@ export const SignInFormSchema = z.object({
 
 export const airportFormSchema = z.object({
   name: z.string().max(255),
-  city: z.string().max(255).optional(),
+  city: z.string().max(255),
 });
 
 export const airplaneFormSchema = z.object({

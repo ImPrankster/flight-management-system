@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import {
   mysqlTable,
   varchar,
@@ -8,10 +9,14 @@ import {
 } from "drizzle-orm/mysql-core";
 
 export const userTable = mysqlTable("User", {
-  id: varchar("id", { length: 255 }).primaryKey(),
+  id: varchar("id", { length: 255 })
+    .primaryKey()
+    .default(sql`(UUID())`),
   email: varchar("email", {
     length: 255,
-  }).unique(),
+  })
+    .unique()
+    .notNull(),
   hashedPassword: varchar("hashed_password", {
     length: 255,
   }).notNull(),

@@ -77,6 +77,7 @@ export default function SignUpPage() {
                     <SelectItem value="customer">Customer</SelectItem>
                     <SelectItem value="airline-staff">Airline Staff</SelectItem>
                     <SelectItem value="booking-agent">Booking Agent</SelectItem>
+                    <SelectItem value="none">None</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />
