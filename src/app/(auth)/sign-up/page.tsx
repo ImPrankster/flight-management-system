@@ -294,7 +294,7 @@ export default function SignUpPage() {
               />
               <FormField
                 control={form.control}
-                name="permissions"
+                name="permission"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Permissions</FormLabel>
@@ -302,7 +302,7 @@ export default function SignUpPage() {
                       {/* @ts-expect-error: value will be coerced */}
                       <Select onValueChange={field.onChange} {...field}>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select permissions" />
+                          <SelectValue placeholder="Select permission" />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="2">Admin</SelectItem>

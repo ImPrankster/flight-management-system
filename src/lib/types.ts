@@ -35,7 +35,7 @@ export const SignUpFormSchema = z.discriminatedUnion("userType", [
     firstName: z.string().max(255),
     lastName: z.string().max(255),
     dateOfBirth: z.string().max(255),
-    permissions: z.coerce.number().min(0).max(2),
+    permission: z.coerce.number().min(0).max(2),
   }),
   z.object({
     email: z.string().email({ message: "Invalid email." }),

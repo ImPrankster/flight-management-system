@@ -31,7 +31,7 @@ export async function signup(formData: FormData) {
     passportCountry: formData.get("passportCountry"),
     dateOfBirth: formData.get("dateOfBirth"),
     airlineName: formData.get("airlineName"),
-    permissions: formData.get("permissions"),
+    permission: formData.get("permission"),
   });
 
   const hashedPassword = await new (
@@ -80,7 +80,7 @@ export async function signup(formData: FormData) {
         lastName: fd.lastName,
         dateOfBirth: fd.dateOfBirth,
         airlineName: fd.airlineName,
-        permissions: fd.permissions,
+        permission: fd.permission,
       });
     } catch (e) {
       await db.delete(userTable).where(eq(userTable.email, fd.email));
