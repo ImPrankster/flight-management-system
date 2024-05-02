@@ -1,10 +1,10 @@
-import { eq } from "drizzle-orm";
+import { count, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { getUser } from "~/server/auth/getUser";
 import { getUserType } from "~/server/auth/getUserType";
 import { db } from "~/server/db";
-import { bookingAgent, ticket } from "~/server/db/schema";
+import { airplane, bookingAgent, flight, ticket } from "~/server/db/schema";
 
 export async function POST(req: Request) {
   const param = z
@@ -13,6 +13,28 @@ export async function POST(req: Request) {
       email: z.string(),
     })
     .parse(await req.json());
+
+  try {
+    const isFull =
+      (
+        await db
+          .select({ count: count() })
+          .from(ticket)
+          .where(eq(ticket.flightNumber, param.flightNumber))
+      )[0]!.count >=
+      (
+        await db
+          .select({ airplaneCapacity: airplane.seatsAmount })
+          .from(airplane)
+          .leftJoin(flight, eq(flight.airplaneIdNum, airplane.idNum))
+          .where(eq(flight.flightNumber, param.flightNumber))
+      )[0]!.airplaneCapacity;
+    if (isFull) {
+      return new Response("Flight is full", { status: 400 });
+    }
+  } catch (e) {
+    return new Response("Failed to purchase", { status: 400 });
+  }
 
   const user = await getUser();
 

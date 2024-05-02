@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { and, eq, sql } from "drizzle-orm";
 import FlightsTable from "~/components/flightsTable";
 import { getUser } from "~/server/auth/getUser";
 import { db } from "~/server/db";
@@ -11,7 +11,12 @@ export default async function MyFlightsPage() {
     .select(flight)
     .from(flight)
     .rightJoin(ticket, eq(flight.flightNumber, ticket.flightNumber))
-    .where(eq(ticket.customerEmail, user!.email));
+    .where(
+      and(
+        eq(ticket.customerEmail, user!.email),
+        sql`Date(${flight.departureTime}) > CURDATE()`,
+      ),
+    );
 
   return (
     <main className="flex flex-col gap-4 p-4">

@@ -36,7 +36,7 @@ export default async function HomePage() {
                       </Link>
                     </Button>
                     <Button variant={"ghost"} asChild className="text-lg">
-                      <Link href="/ticketing/spending">
+                      <Link href="/ticketing/statistic">
                         Check My Spending <ArrowRight className="ml-2" />
                       </Link>
                     </Button>
@@ -90,7 +90,7 @@ export default async function HomePage() {
                       </Link>
                     </Button>
                     <Button variant={"ghost"} asChild className="text-lg">
-                      <Link href="/ticketing/statistics">
+                      <Link href="/ticketing/statistic">
                         Check My Stats <ArrowRight className="ml-2" />
                       </Link>
                     </Button>
