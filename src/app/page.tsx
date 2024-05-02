@@ -71,12 +71,6 @@ export default async function HomePage() {
                             View System Report <ArrowRight className="ml-2" />
                           </Link>
                         </Button>
-                        <Button variant={"ghost"} asChild className="text-lg">
-                          <Link href="/staff/my-earning">
-                            View My Earning
-                            <ArrowRight className="ml-2" />
-                          </Link>
-                        </Button>
                       </>
                     ),
                     "booking-agent": (
