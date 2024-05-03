@@ -3,7 +3,6 @@ import "~/styles/globals.css";
 import { Inter } from "next/font/google";
 import { Toaster } from "~/components/ui/sonner";
 import NavBar from "~/components/navBar";
-import QueryWrapper from "./queryWrapper";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,14 +22,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <QueryWrapper>
-        <body className={`font-sans ${inter.variable}`}>
-          <NavBar />
-          <div className="h-16" />
-          {children}
-          <Toaster />
-        </body>
-      </QueryWrapper>
+      <body className={`font-sans ${inter.variable}`}>
+        <NavBar />
+        <div className="h-16" />
+        {children}
+        <Toaster />
+      </body>
     </html>
   );
 }
