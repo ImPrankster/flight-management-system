@@ -14,7 +14,7 @@ import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
 import { SignInFormSchema } from "~/lib/types";
 import { useForm } from "react-hook-form";
-import { signin } from "~/server/auth/signin";
+import { signin } from "~/server/auth/actions/signin";
 
 export default function SignInPage() {
   const form = useForm<z.infer<typeof SignInFormSchema>>({

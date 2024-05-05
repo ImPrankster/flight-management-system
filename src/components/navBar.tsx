@@ -1,4 +1,4 @@
-import { signout } from "~/server/auth/signout";
+import { signout } from "~/server/auth/actions/signout";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { getUser } from "~/server/auth/getUser";

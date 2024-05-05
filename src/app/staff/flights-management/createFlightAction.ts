@@ -28,7 +28,7 @@ export async function createFlightAction(formData: FormData) {
   const airlineName = aNResult[0]!.airlineName;
 
   try {
-    await db.insert(flight).values({ ...fd, airlineName: airlineName! });
+    await db.insert(flight).values({ ...fd, airlineName: airlineName });
   } catch (e) {
     throw new Error("Failed to add flight");
   }

@@ -1,11 +1,11 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { lucia } from ".";
+import { lucia } from "..";
 import { redirect } from "next/navigation";
-import { db } from "../db";
+import { db } from "../../db";
 import { SignInFormSchema } from "~/lib/types";
-import { userTable } from "../db/schema";
+import { userTable } from "../../db/schema";
 import { eq } from "drizzle-orm";
 
 export async function signin(formData: FormData) {

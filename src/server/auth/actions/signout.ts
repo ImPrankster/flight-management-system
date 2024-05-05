@@ -1,8 +1,8 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { lucia } from ".";
-import { validateRequest } from "./getUser";
+import { lucia } from "..";
+import { validateRequest } from "../getUser";
 import { redirect } from "next/navigation";
 
 export async function signout() {
